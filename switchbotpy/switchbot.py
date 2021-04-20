@@ -36,7 +36,7 @@ class Scanner(object):
         """Scan for available switchbots"""
         LOG.info("scanning for bots")
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             devices = self.adapter.scan()
         finally:
             self.adapter.stop()
@@ -58,7 +58,7 @@ class Scanner(object):
 
     def _is_switchbot(self, mac: str) -> bool:
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             device = self.adapter.connect(mac, address_type=pygatt.BLEAddressType.random)
             characteristics = self.adapter.discover_characteristics(device)
             device.disconnect()
@@ -103,7 +103,7 @@ class Bot(object):
         """
         LOG.info("press bot")
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             self._connect()
             self._activate_notifications()
 
@@ -126,7 +126,7 @@ class Bot(object):
 
         LOG.info("switch bot on=%s", str(switch_on))
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             self._connect()
             self._activate_notifications()
 
@@ -155,7 +155,7 @@ class Bot(object):
             raise ValueError("hold time must be between [0, 60] seconds")
 
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             self._connect()
             self._activate_notifications()
 
@@ -177,7 +177,7 @@ class Bot(object):
 
         LOG.info("get timer: %d", idx)
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             self._connect()
             self._activate_notifications()
 
@@ -208,7 +208,7 @@ class Bot(object):
         if idx < 0 or idx > 4 or num_timer <= idx or num_timer < 1 or num_timer > 5:
             raise ValueError("Illegal Timer Idx or Number of Timers")
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             self._connect()
             self._activate_notifications()
 
@@ -230,7 +230,7 @@ class Bot(object):
 
         LOG.info("set timers")
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             self._connect()
             self._activate_notifications()
 
@@ -261,7 +261,7 @@ class Bot(object):
 
         LOG.info("setting current timestamp")
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             self._connect()
             self._activate_notifications()
 
@@ -299,7 +299,7 @@ class Bot(object):
         self.set_timers(timers=[])
 
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             self._connect()
             self._activate_notifications()
 
@@ -331,7 +331,7 @@ class Bot(object):
 
         LOG.info("get settings")
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             self._connect()
             self._activate_notifications()
 
@@ -365,7 +365,7 @@ class Bot(object):
 
         LOG.info("get timers")
         try:
-            self.adapter.start()
+            self.adapter.start(reset_on_start=False)
             self._connect()
             self._activate_notifications()
 
